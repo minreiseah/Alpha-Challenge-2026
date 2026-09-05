@@ -1,0 +1,17 @@
+[project]
+name = "alpha-challenge-2026"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "minreiseah", email = "minrei101@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+alpha-challenge-2026 = "alpha_challenge_2026:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"
