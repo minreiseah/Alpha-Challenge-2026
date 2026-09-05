@@ -1,2 +1,3 @@
 # Hash of the transaction on the source chain that set the withdrawal in motion
-origin_tx =
+# https://explorer.hiro.so/txid/0x36f2d5c245d08de980d0d23e4bd23b088312ce9e4b9845b4fd71930f52aab8fc?chain=mainnet&tab=overview
+origin_tx=0x36f2d5c245d08de980d0d23e4bd23b088312ce9e4b9845b4fd71930f52aab8fc
