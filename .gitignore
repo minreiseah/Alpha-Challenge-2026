@@ -1,4 +1,4 @@
 .env
 out/
 cache/
-broadcast/
+broadcast/soljson-latest.js
